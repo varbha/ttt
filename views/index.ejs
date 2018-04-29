@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <!-- <script src="index.js"></script> -->
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>
+        <%= outer %>
+    </h1>
+    <p>log :
+        <%= retrieval %>
+    </p>
+    <p>log :
+        <%= word %>
+    </p>
+
+    <input type="text" id="entry" placeholder="enter N">
+    <button id="submit" onclick = "populateTable()">Submit</button>
+
+    <table id = "fTable">
+    </table>
+
+<script>
+    function populateTable(){
+    $.ajax({
+        url:'/main',
+        type: 'POST',
+        data: {n : document.getElementById("entry").value},
+        success : function(data){
+            $('#fTable').empty();
+            let table = document.getElementById('fTable');
+            console.log(data.solution);
+            for ( let i = 0;i<data.solution.length;i++){
+                let tr = document.createElement('tr');
+                let tdw = document.createElement('td');
+                let tdf = document.createElement('td');
+                console.log(data.solution[i][0]);
+                
+                tdw.innerHTML = data.solution[i][0];
+                tdf.innerHTML = data.solution[i][1];
+
+                
+                tr.appendChild(tdw);
+                tr.appendChild(tdf);
+                table.appendChild(tr);
+            }
+
+        }
+
+    })
+}
+
+</script>
+</body>
+</html>
