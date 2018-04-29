@@ -1,6 +1,6 @@
 module.exports = function (app) {
 
-    var mainController = require('../controllers/mainController');
+    var mainController = require('../controllers/MainController.js');
 
     app.get('/api/ttt', (req, res) => {
 
